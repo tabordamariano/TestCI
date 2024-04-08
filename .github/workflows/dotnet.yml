@@ -41,29 +41,18 @@ jobs:
     - name: Build Tests
       run: dotnet build --no-restore
       working-directory: TestNinja.UnitTests
-    #- name: Run Unit Test      
-      #run: dotnet test --logger "trx;LogFileName=test-results.trx"
-    #- name: Copy Unit Test Results
-      #run: mkdir TestResults; cp TestNinja.UnitTests/TestResults/*.trx TestResults/
-      #shell: bash
-    #- name: Test Report
-      #uses: dorny/test-reporter@v1
-      #if: success() || failure()
-      #with:
-        #name: Test Results
-        #path: TestResults/*.trx
-        #reporter: dotnet-trx
-
     - name: Run Unit Test
       run: dotnet test --logger "trx;LogFileName=test-results.trx" || true
-      
+    - name: Copy Unit Test Results
+      run: mkdir TestResults; cp TestNinja.UnitTests/TestResults/test-results.trx TestResults/
+      shell: bash
+        
     - name: Test Report
       uses: dorny/test-reporter@v1
-      if: always()
+      if: success() || failure()
       with:
-        name: DotNET Tests
-        path: "TestNinja.UnitTests/TestResults/test-results.trx"                            
+        name: Test Results
+        path: TestResults/*.trx
         reporter: dotnet-trx
-        fail-on-error: true
 
 
