@@ -41,16 +41,16 @@ jobs:
     - name: Build Tests
       run: dotnet build --no-restore
       working-directory: TestNinja.UnitTests
-    - name: Create Test Results folder
-      run: mkdir TestResults
+    #- name: Create Test Results folder
+      #run: mkdir TestResults
     - name: Run Unit Test      
-      run: dotnet test --no-build --verbosity normal --logger:trx
-    #- name: Copy Unit Test Results
-      #run: cp TestNinja.UnitTests/TestResults/*.trx TestResults/
-      #shell: bash
-    #- name: Test Report
-      #uses: dorny/test-reporter@v1
-      #if: success() || failure()
+      run: dotnet test --no-build --verbosity normal -- NUnit.TestOutputXml=TestResults
+    - name: Copy Unit Test Results
+      run: mkdir TestResults; cp TestNinja.UnitTests/bin/Debug/net8.0/TestResults/*.xml TestResults/
+      shell: bash
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
       #with:
         #name: Test Results
         #path: TestResults/*.trx
