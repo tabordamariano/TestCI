@@ -44,6 +44,6 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Copy Unit Test Results
-      run: mkdir TestResults; cp TestNinja.UnitTests/**/TestResults/*.Unit.Tests.trx TestResults/
+      run: mkdir TestResults; cp TestNinja.UnitTests/**/TestResults/*.Tests.trx TestResults/
       shell: bash
 
