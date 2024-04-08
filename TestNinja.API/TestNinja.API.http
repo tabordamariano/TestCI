@@ -1,6 +1,0 @@
-@TestNinja.API_HostAddress = http://localhost:5241
-
-GET {{TestNinja.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

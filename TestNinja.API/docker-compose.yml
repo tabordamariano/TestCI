@@ -1,0 +1,11 @@
+version: "3.9"
+# docker network create --gateway 10.18.1.1 --subnet 10.18.1.0/24 pocnetwork
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      MSSQL_SA_PASSWORD: Password123!
+      SA_PASSWORD: Password123!
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
