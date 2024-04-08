@@ -44,16 +44,16 @@ jobs:
     #- name: Create Test Results folder
       #run: mkdir TestResults
     - name: Run Unit Test      
-      run: dotnet test --no-build --verbosity normal -- NUnit.TestOutputXml=TestResults
+      run: dotnet test --logger "trx;LogFileName=test-results.trx"
     - name: Copy Unit Test Results
-      run: mkdir TestResults; cp TestNinja.UnitTests/bin/Debug/net8.0/TestResults/*.xml TestResults/
+      run: mkdir TestResults; cp TestNinja.UnitTests/TestResults/*.trx TestResults/
       shell: bash
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: success() || failure()
       with:
         name: Test Results
-        path: TestResults/*.xml
-        reporter: jest-junit
+        path: TestResults/*.trx
+        reporter: dotnet-trx
 
 
