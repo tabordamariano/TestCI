@@ -8,7 +8,7 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["EF_API.csproj", "."]
+COPY ["TestNinja.API.csproj", "."]
 RUN dotnet restore "./././TestNinja.API.csproj"
 COPY . .
 WORKDIR "/src/."

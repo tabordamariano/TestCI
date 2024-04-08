@@ -1,40 +1,29 @@
-version: '3.7'
-
+version: "3.9"
+# docker network create --gateway 10.18.1.1 --subnet 10.18.1.0/24 pocnetwork
 services:
-           
-    # rabbitmq:
-        # image: rabbitmq-with-stream
-        # build:
-          # context: .
-          # dockerfile: Dockerfile
-        # ports:
-          # - 5552:5552
-          # - 5672:5672
-          # - 15672:15672
-        # # depends_on:
-          # # - sqlserver      
-        # environment: 
-          # - ASPNETCORE_ENVIRONMENT=test-docker  
-          # - RABBITMQ_DEFAULT_USER=admin
-          # - RABBITMQ_DEFAULT_PASS=admin
-          # - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbitmq_stream advertised_host localhost
-  # rabbitmq:
-    # image: rabbitmq:3.11-management-alpine
-    # container_name: rabbitmq
-    # ports:
-      # - 5552:5552
-      # - 5672:5672
-      # - 15672:15672
-    # volumes:
-      # - ./config/local/rabbitmq/enabled_plugins.txt:/etc/rabbitmq/enabled_plugins:ro
-    # environment:
-      # RABBITMQ_DEFAULT_USER: admin
-      # RABBITMQ_DEFAULT_PASS: admin
-    
-    sqlserver:
-        image: "mcr.microsoft.com/mssql/server:2019-latest"
-        environment:
-            SA_PASSWORD: Password123!
-            ACCEPT_EULA: "Y"
-        ports:
-          - "1433:1433"
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      MSSQL_SA_PASSWORD: Password123!
+      SA_PASSWORD: Password123!
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+
+  testninja:
+    image: testninjaapi:0.1.0
+    restart: unless-stopped
+    build:
+      context: /TestNinja.API
+      dockerfile: Dockerfile
+    depends_on:
+      #- rabbitmq      
+      - sqlserver
+    environment:
+     ASPNETCORE_ENVIRONMENT: prod
+     CONNECTIONSTRING: Data Source=sqlserver;Initial Catalog=tests;user id=sa ;pwd=Password123!;TrustServerCertificate=true     
+    ports:
+      - 8080:80
+    # networks:
+      # pocnetwork:
+       # ipv4_address: 10.18.1.20

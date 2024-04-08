@@ -9,3 +9,21 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
+
+  testninja:
+    image: testninjaapi:0.1.0
+    restart: unless-stopped
+    build:
+      context: /TestNinja.API
+      dockerfile: Dockerfile
+    depends_on:
+      #- rabbitmq      
+      - sqlserver
+    environment:
+     ASPNETCORE_ENVIRONMENT: prod
+     CONNECTIONSTRING: Data Source=sqlserver;Initial Catalog=tests;user id=sa ;pwd=Password123!;TrustServerCertificate=true     
+    ports:
+      - 8080:80
+    # networks:
+      # pocnetwork:
+       # ipv4_address: 10.18.1.20

@@ -12,8 +12,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+string connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
+if (string.IsNullOrEmpty(connectionString))
+{
+    connectionString = "Server=localhost,1433;Database=tests;User Id=sa;Password=Password123!;Encrypt=False;";
+}
+
 builder.Services.AddDbContext<DemoContext>((c, builder) =>
-            builder.UseSqlServer("Server=localhost,1433;Database=DemoEF;User Id=sa;Password=Password123!;Encrypt=False;")
+            builder.UseSqlServer(connectionString)
         );
 
 
