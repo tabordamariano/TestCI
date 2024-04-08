@@ -1,2 +1,3 @@
 # TestCI
-Test CI into .NET 8 API
+Unit Test with .NET 8 API and NUnit
+Run tests in the CI
