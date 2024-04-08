@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TestNinja\TestNinja.csproj" />
+    <ProjectReference Include="..\TestNinjaNet8\TestNinja.csproj" />
   </ItemGroup>
 
   <ItemGroup>
