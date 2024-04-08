@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+           
+    # rabbitmq:
+        # image: rabbitmq-with-stream
+        # build:
+          # context: .
+          # dockerfile: Dockerfile
+        # ports:
+          # - 5552:5552
+          # - 5672:5672
+          # - 15672:15672
+        # # depends_on:
+          # # - sqlserver      
+        # environment: 
+          # - ASPNETCORE_ENVIRONMENT=test-docker  
+          # - RABBITMQ_DEFAULT_USER=admin
+          # - RABBITMQ_DEFAULT_PASS=admin
+          # - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbitmq_stream advertised_host localhost
+  # rabbitmq:
+    # image: rabbitmq:3.11-management-alpine
+    # container_name: rabbitmq
+    # ports:
+      # - 5552:5552
+      # - 5672:5672
+      # - 15672:15672
+    # volumes:
+      # - ./config/local/rabbitmq/enabled_plugins.txt:/etc/rabbitmq/enabled_plugins:ro
+    # environment:
+      # RABBITMQ_DEFAULT_USER: admin
+      # RABBITMQ_DEFAULT_PASS: admin
+    
+    sqlserver:
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        environment:
+            SA_PASSWORD: Password123!
+            ACCEPT_EULA: "Y"
+        ports:
+          - "1433:1433"
