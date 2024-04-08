@@ -13,8 +13,6 @@ jobs:
   Build_And_Run_Tests:
 
     runs-on: ubuntu-latest
-    permissions:
-      actions: read|write|all
 
     steps:
     - uses: actions/checkout@v4
