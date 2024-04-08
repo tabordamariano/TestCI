@@ -59,6 +59,13 @@ jobs:
         path: TestResults/*.trx
         reporter: dotnet-trx
 
+
+    - name: Start containers
+      run: docker-compose -f "docker-compose.yml" up -d --build
+    - name: Wait for docker containers to setup
+      run: sleep 30s
+      shell: bash
+
     #- name: Publish Test Results
       #uses: EnricoMi/publish-unit-test-result-action@v2.16.1
       #if: always()
