@@ -50,7 +50,7 @@ jobs:
       if: success() || failure()
       with:
         name: Test Results
-        path: TestResults/*.trx
+        path: TestNinja.UnitTests/TestResults/*.trx
         reporter: dotnet-trx
     #- name: Copy Unit Test Results
       #run: mkdir TestResults; cp TestNinja.UnitTests/**/TestResults/*.Tests.trx TestResults/
