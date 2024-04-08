@@ -45,6 +45,13 @@ jobs:
       run: mkdir TestResults
     - name: Run Unit Test      
       run: dotnet test --no-build --verbosity normal -- NUnit.TestOutputXml=TestResults
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: Test Results
+        path: TestResults/*.trx
+        reporter: dotnet-trx
     #- name: Copy Unit Test Results
       #run: mkdir TestResults; cp TestNinja.UnitTests/**/TestResults/*.Tests.trx TestResults/
       #shell: bash
