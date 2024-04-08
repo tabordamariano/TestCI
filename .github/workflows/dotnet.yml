@@ -45,15 +45,15 @@ jobs:
       run: mkdir TestResults
     - name: Run Unit Test      
       run: dotnet test --no-build --verbosity normal --logger:trx
-    - name: Copy Unit Test Results
-      run: cp TestNinja.UnitTests/TestResults/*.trx TestResults/
-      shell: bash
-    - name: Test Report
-      uses: dorny/test-reporter@v1
-      if: success() || failure()
-      with:
-        name: Test Results
-        path: TestResults/*.trx
-        reporter: dotnet-trx
+    #- name: Copy Unit Test Results
+      #run: cp TestNinja.UnitTests/TestResults/*.trx TestResults/
+      #shell: bash
+    #- name: Test Report
+      #uses: dorny/test-reporter@v1
+      #if: success() || failure()
+      #with:
+        #name: Test Results
+        #path: TestResults/*.trx
+        #reporter: dotnet-trx
 
 
