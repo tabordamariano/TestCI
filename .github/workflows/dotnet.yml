@@ -41,10 +41,10 @@ jobs:
     - name: Build Tests
       run: dotnet build --no-restore
       working-directory: TestNinja.UnitTests
-    - name: Create Test Results folder
-      run: mkdir TestResults
+    #- name: Create Test Results folder
+      #run: mkdir TestResults
     - name: Run Unit Test      
-      run: dotnet test --no-build --verbosity normal -- NUnit.TestOutputXml=TestResults
+      run: dotnet test --no-build --verbosity normal --dotnet test --logger:trx
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: success() || failure()
