@@ -25,7 +25,7 @@ jobs:
       working-directory: TestNinjaNet8
     - name: Build
       run: dotnet build --no-restore
-      # working-directory: TestNinjaNet8
+      working-directory: TestNinjaNet8
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
