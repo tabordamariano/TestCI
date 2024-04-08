@@ -59,4 +59,10 @@ jobs:
         path: TestResults/*.trx
         reporter: dotnet-trx
 
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2.16.1
+      if: always()
+      with:
+        trx_files: TestResults/*.trx
+
 
