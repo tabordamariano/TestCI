@@ -13,6 +13,8 @@ jobs:
   Build_And_Run_Tests:
 
     runs-on: ubuntu-latest
+    permissions:
+      actions: read|write|all
 
     steps:
     - uses: actions/checkout@v4
@@ -62,7 +64,7 @@ jobs:
       if: always()
       with:
         name: DotNET Tests
-        path: "**/test-results.trx"                            
+        path: "TestNinja.UnitTests/TestResults/test-results.trx"                            
         reporter: dotnet-trx
         fail-on-error: true
 
