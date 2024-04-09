@@ -14,7 +14,7 @@ services:
     image: testninjaapi:0.1.0
     restart: unless-stopped
     build:
-      context: /TestNinja.API
+      context: ./TestNinja.API
       dockerfile: Dockerfile
     depends_on:
       #- rabbitmq      
