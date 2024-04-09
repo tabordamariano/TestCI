@@ -8,6 +8,8 @@ namespace TestNinja.API.Models
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public ICollection<Domicilio> Domicilios { get; set; }
+
+       
     }
 }
 
