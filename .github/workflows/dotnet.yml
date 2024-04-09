@@ -45,6 +45,13 @@ jobs:
     - name: Build Tests
       run: dotnet build --no-restore
       working-directory: TestNinja.UnitTests
+
+    - name: Start containers
+      run: docker-compose -f "docker-compose.yml" up -d --build
+    - name: Wait for docker containers to setup
+      run: sleep 30s
+      shell: bash
+      
     - name: Run Unit Test
       run: dotnet test --logger "trx;LogFileName=test-results.trx" || true
       env:
@@ -63,11 +70,7 @@ jobs:
         reporter: dotnet-trx
 
 
-    - name: Start containers
-      run: docker-compose -f "docker-compose.yml" up -d --build
-    - name: Wait for docker containers to setup
-      run: sleep 30s
-      shell: bash
+
 
     #- name: Publish Test Results
       #uses: EnricoMi/publish-unit-test-result-action@v2.16.1
