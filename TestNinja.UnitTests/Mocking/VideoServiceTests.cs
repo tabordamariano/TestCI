@@ -12,7 +12,7 @@ using TestNinja.Mocking;
 
 namespace TestNinja.UnitTests.Mocking
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class VideoServiceTests
     {
         private VideoService _videoService;

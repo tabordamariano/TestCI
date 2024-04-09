@@ -10,12 +10,13 @@ using TestNinja.Fundamentals;
 
 namespace TestNinja.UnitTests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class ErrorLoggerTests
     {
 
         [Test]
-        [TestCase("a")]        
+        [TestCase("a")]
+        [Category("Unit")]
         public void Log_WhenValidTextIsPassed_SetTheLastErrorProperty(string? error)
         {
             var logger = new ErrorLogger();
@@ -29,6 +30,7 @@ namespace TestNinja.UnitTests
         [TestCase(null)]
         [TestCase("")]
         [TestCase(" " )]
+        [Category("Unit")]
         public void Log_WhenNoValidTextIsPassed_SetTheLastErrorProperty(string? error)
         {
             var logger = new ErrorLogger();
@@ -41,6 +43,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void Log_ValidError_RaiseErrorLoggedEvent()
         {
             var logger = new ErrorLogger();

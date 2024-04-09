@@ -11,7 +11,7 @@ using Math = TestNinja.Fundamentals.Math;
 
 namespace TestNinja.UnitTests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class MathTests
     {
         private Math _math;
@@ -28,6 +28,7 @@ namespace TestNinja.UnitTests
 
 
         [Test]
+        [Category("Unit")]
         public void Add_WhenCalled_ReturnTheSumOfArguments()
         {
             //Act
@@ -41,6 +42,7 @@ namespace TestNinja.UnitTests
         [TestCase(1, 2, 2)]
         [TestCase(2, 1, 2)]
         [TestCase(2, 2, 2)]
+        [Category("Unit")]
         public void Max_WhenCalled_ReturnTheGreaterArgument(int a, int b, int expectedResult)
         {
             //Act
@@ -53,6 +55,7 @@ namespace TestNinja.UnitTests
 
 
         [Test]
+        [Category("Unit")]
         public void GetOddnumbers_LimitIsGreaterThanZero_ReturnOddNumbersUpToLimit()
         {
             var result = _math.GetOddNumbers(5);

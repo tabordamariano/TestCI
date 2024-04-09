@@ -10,11 +10,12 @@ using TestNinja.Fundamentals;
 
 namespace TestNinja.UnitTests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class HtmlFormatterTests
     {
 
         [Test]
+        [Category("Unit")]
         public void FormatAsBold_WhenCalled_ShouldEncloseTheStringWithStrongElement()
         {
             var formatter = new HtmlFormatter();

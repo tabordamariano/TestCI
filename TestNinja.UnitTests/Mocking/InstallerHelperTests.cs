@@ -13,7 +13,7 @@ using TestNinja.Mocking;
 
 namespace TestNinja.UnitTests.Mocking
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class InstallerHelperTests
     {
         private Mock<IFileDownloader> fileDownloader;

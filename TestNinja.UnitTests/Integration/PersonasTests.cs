@@ -26,7 +26,7 @@ using TestNinja.Fundamentals;
 
 namespace TestNinja.UnitTests.Integration
 {
-    [TestFixture]
+    [TestFixture(Category ="Integration")]
 
     public class PersonasTests
     {

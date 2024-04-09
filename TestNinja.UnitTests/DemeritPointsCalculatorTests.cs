@@ -10,13 +10,14 @@ using TestNinja.Fundamentals;
 
 namespace TestNinja.UnitTests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class DemeritPointsCalculatorTests
     {
 
         [Test]
         [TestCase(-1)]
         [TestCase(301)]
+        [Category("Unit")]
         public void CalculateDemeritPoints_SpeedIsOutOfRange_ThrowsArgumentOutOfRangeException(int speed)
         {
             var calculator = new DemeritPointsCalculator();
@@ -31,6 +32,7 @@ namespace TestNinja.UnitTests
         [TestCase(66, 0)]
         [TestCase(70, 1)]
         [TestCase(75, 2)]
+        [Category("Unit")]
         public void CalculateDemeritPoints_SpeedIsGreaterOrEqualThanZero_ReturnsDemeritPoints(int speed, int points)
         {
             var calculator = new DemeritPointsCalculator();

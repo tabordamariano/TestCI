@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace TestNinja.UnitTests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class StackTests
     {
 
         [Test]
+        [Category("Unit")]
         public void Stack_CheckStackEmpty_ReturnsZeroCount()
         {
             var stack = new TestNinja.Fundamentals.Stack<string>();
@@ -21,6 +22,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void Stack_PushElement_ReturnsCountPlusOne()
         {
             var stack = new TestNinja.Fundamentals.Stack<string>();
@@ -30,6 +32,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void Stack_PeekElement_ReturnsCountAndElement()
         {
             var stack = new TestNinja.Fundamentals.Stack<string>();            
@@ -43,6 +46,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void Stack_PopElement_ReturnsCountMinosOneAndElement()
         {
             var stack = new TestNinja.Fundamentals.Stack<string>();            
@@ -57,6 +61,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void Stack_PopElementWhenStackIsEmpty_ReturnsInvalidOperationException()
         {
             var stack = new TestNinja.Fundamentals.Stack<string>();            
@@ -66,6 +71,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void Stack_PeekElementWhenStackIsEmpty_ReturnsInvalidOperationException()
         {
             var stack = new TestNinja.Fundamentals.Stack<string>();
@@ -75,6 +81,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void Stack_PushNullElement_ReturnsArgumentNullException()
         {
             var stack = new TestNinja.Fundamentals.Stack<string>();

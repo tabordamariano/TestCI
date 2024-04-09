@@ -4,7 +4,7 @@ using TestNinja.Fundamentals;
 
 namespace TestNinja.UnitTests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class ReservationTests
     {
         [SetUp]
@@ -13,6 +13,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void CanBeCancelledBy_AdminCancelling_ReturnsTrue()
         {
             //Arrange
@@ -26,6 +27,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void CanBeCancelledBy_NotAdminCancelling_ReturnsFalse()
         {
             //Arrange
@@ -39,6 +41,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void CanBeCancelledBy_SameUserCancelling_ReturnsTrue()
         {
             //Arrange
@@ -54,6 +57,7 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Category("Unit")]
         public void CanBeCancelledBy_AnotherUserCancelling_ReturnsFalse()
         {
             //Arrange
