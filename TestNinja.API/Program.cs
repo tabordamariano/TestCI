@@ -1,6 +1,7 @@
 using TestNinja.API.Data;
 
 using Microsoft.EntityFrameworkCore;
+using TestNinja.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 string connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
 if (string.IsNullOrEmpty(connectionString))
 {
@@ -22,6 +24,7 @@ builder.Services.AddDbContext<DemoContext>((c, builder) =>
             builder.UseSqlServer(connectionString)
         );
 
+builder.Services.AddScoped<ServicePersonas>();
 
 builder.Services.AddSwaggerGen(c =>
 {
