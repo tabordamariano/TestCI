@@ -18,12 +18,10 @@ namespace TestNinja.API.Controllers
     [Route("api/[controller]")]
     public class PersonasController : ControllerBase
     {
-        private readonly DemoContext _context;
         private readonly ServicePersonas _service;
 
-        public PersonasController(DemoContext context, ServicePersonas service)
+        public PersonasController(ServicePersonas service)
         {
-            _context = context;
             _service = service;
         }
 
@@ -43,9 +41,11 @@ namespace TestNinja.API.Controllers
         {
             try
             {
-                _context.Update(persona);
-                await _context.SaveChangesAsync();
-                return Results.Ok(persona);
+                bool response = await _service.UpdatePersona(persona);
+                if (response == true)
+                    return Results.Ok(response);
+                else
+                    return Results.Problem("Error al modificar la persona.");
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -63,9 +63,6 @@ namespace TestNinja.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                //_context.Add(persona);
-                //var response = await _context.SaveChangesAsync();
-                //return Results.Ok(response);
                 bool response = await _service.InsertPersona(persona);
                 if (response == true)
                     return Results.Ok(response);

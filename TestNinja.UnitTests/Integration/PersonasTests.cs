@@ -90,6 +90,41 @@ namespace TestNinja.UnitTests.Integration
         }
 
         [Test]
+        public async Task UpdatePersona_FromService_ReturnPersonaUpdated()
+        {
+            string connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                connectionString = "Server=localhost,1433;Database=tests;User Id=sa;Password=Password123!;Encrypt=False;";
+            }
+
+            var optionsBuilder = new DbContextOptionsBuilder<DemoContext>();
+            optionsBuilder.UseSqlServer(connectionString);
+
+            DemoContext dbContext = new DemoContext(optionsBuilder.Options);
+
+            ServicePersonas service = new ServicePersonas(dbContext);
+
+            Persona persona = new Persona { Nombre = "Mariano", Apellido = "Taborda", Domicilios = new List<Domicilio>() };
+
+            //Inserto una persona para que exista al menos una
+            await service.InsertPersona(persona);
+
+            //recupero las personas y modifico la ultima
+            List<Persona> personas = (List<Persona>)await service.GetPersonas(null);
+
+            persona = personas.Last();
+            persona.Nombre = "Modificado";
+
+            await service.UpdatePersona(persona);
+
+            personas = (List<Persona>)await service.GetPersonas(persona.Id);
+
+            //Verifico que haya 1 persona y el nombre se haya modificado
+            Assert.That(Is.Equals(personas.Last().Nombre, persona.Nombre));
+        }
+
+        [Test]
         public void GetPersonas_FromEndpoint_ReturnListWithNewPersona()
         {
             string baseurl = Environment.GetEnvironmentVariable("BASE_URL");

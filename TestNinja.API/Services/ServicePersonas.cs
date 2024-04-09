@@ -17,15 +17,24 @@ namespace TestNinja.API.Services
 
         public async Task<IEnumerable<Persona>> GetPersonas(int? id)
         {
-            if (id == null)
+            try
             {
-                var result = await _context.Personas.ToListAsync();
-                return result;
+                if (id == null)
+                {
+                    var result = await _context.Personas.ToListAsync();
+                    return result;
+                }
+                else
+                {
+                    var result = await _context.Personas.Include(p => p.Domicilios).Where(p => p.Id.Equals(id)).FirstAsync();
+                    List<Persona> resultList = new List<Persona>();
+                    resultList.Add(result);
+                    return resultList;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var result = await _context.Personas.Include(p => p.Domicilios).Where(p => p.Id.Equals(id)).FirstAsync();
-                return (IEnumerable<Persona>)result;
+                return null;
             }
         }
 
@@ -43,5 +52,18 @@ namespace TestNinja.API.Services
             }
         }
 
+        public async Task<bool> UpdatePersona(Persona persona)
+        {
+            try
+            {
+                _context.Personas.Update(persona);
+                var response = await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
