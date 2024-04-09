@@ -47,6 +47,9 @@ jobs:
       working-directory: TestNinja.UnitTests
     - name: Run Unit Test
       run: dotnet test --logger "trx;LogFileName=test-results.trx" || true
+      env:
+        BASE_URL: http://localhost:8095
+  
     - name: Copy Unit Test Results
       run: mkdir TestResults; cp TestNinja.UnitTests/TestResults/test-results.trx TestResults/
       shell: bash
