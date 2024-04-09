@@ -23,7 +23,7 @@ services:
      ASPNETCORE_ENVIRONMENT: prod
      CONNECTIONSTRING: Data Source=sqlserver;Initial Catalog=tests;user id=sa ;pwd=Password123!;TrustServerCertificate=true     
     ports:
-      - 8080:80
+      - 8095:8080
     # networks:
       # pocnetwork:
        # ipv4_address: 10.18.1.20

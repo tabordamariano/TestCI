@@ -9,14 +9,14 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["TestNinja.API.csproj", "."]
-RUN dotnet restore "./././TestNinja.API.csproj"
+RUN dotnet restore "./TestNinja.API.csproj"
 COPY . .
 WORKDIR "/src/."
 RUN dotnet build "./TestNinja.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./TestNinja.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./TestNinja.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish #/p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
