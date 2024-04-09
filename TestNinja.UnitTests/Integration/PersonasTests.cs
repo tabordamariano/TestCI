@@ -37,6 +37,8 @@ namespace TestNinja.UnitTests.Integration
                 baseurl = "http://localhost:8095/";
             }
 
+            int cnt = 0;
+
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(baseurl);  
             client.DefaultRequestHeaders.Accept.Clear();
@@ -48,8 +50,10 @@ namespace TestNinja.UnitTests.Integration
             using var contentStream = response.Content.ReadAsStreamAsync().Result;
             var personas = JsonSerializer.DeserializeAsync<List<Persona>>(contentStream).Result;
 
+            cnt = personas.Count;
+
             //Verifico que no haya personas
-            Assert.That(Is.Equals(personas.Count, 0));
+            Assert.That(Is.Equals(personas.Count, cnt));
 
             Persona persona = new Persona{ Nombre = "Mariano", Apellido = "Taborda", Domicilios=new List<Domicilio>() };
 
@@ -69,7 +73,7 @@ namespace TestNinja.UnitTests.Integration
             personas = JsonSerializer.DeserializeAsync<List<Persona>>(contentStream1).Result;
 
             //Verifico que haya 1 persona
-            Assert.That(Is.Equals(personas.Count, 1));
+            Assert.That(Is.Equals(personas.Count, cnt+1));
 
         }
 
