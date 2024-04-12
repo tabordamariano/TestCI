@@ -75,6 +75,7 @@ namespace TestNinja.UnitTests.Integration
 
             List<Persona> personas = (List<Persona>)await service.GetPersonas(null);
 
+            //Busco una persona que no existe
             personas = personas.Where(p => p.Id == -1).ToList();
 
             //Verifico que no haya personas
