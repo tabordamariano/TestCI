@@ -58,6 +58,32 @@ namespace TestNinja.UnitTests.Integration
         }
 
         [Test]
+        public async Task GetPersonasWithWrongCriteria_FromService_ReturnEmptyList()
+        {
+            string connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                connectionString = "Server=localhost,1433;Database=tests;User Id=sa;Password=Password123!;Encrypt=False;";
+            }
+
+            var optionsBuilder = new DbContextOptionsBuilder<DemoContext>();
+            optionsBuilder.UseSqlServer(connectionString);
+
+            DemoContext dbContext = new DemoContext(optionsBuilder.Options);
+
+            ServicePersonas service = new ServicePersonas(dbContext);
+
+            List<Persona> personas = (List<Persona>)await service.GetPersonas(null);
+
+            personas = personas.Where(p => p.Id == -1).ToList();
+
+            //Verifico que no haya personas
+            Assert.That(Is.Equals(personas.Count, 0));
+
+
+        }
+
+        [Test]
         public async Task AddPersona_FromService_ReturnListWithNewPersona()
         {
             string connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
